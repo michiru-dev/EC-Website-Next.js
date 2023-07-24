@@ -5,6 +5,8 @@ import Button from '@/components/Button'
 import { useState } from 'react'
 import Cart from '../cart'
 import Link from 'next/link'
+import { useAppDispatch } from '@/redux/hooks'
+import { addToCart } from '@/redux/slicers/cartSlice'
 
 export async function getStaticPaths() {
   const allItems = await axios
@@ -34,10 +36,10 @@ export async function getStaticProps({ params }: { params: ItemType }) {
 }
 
 export default function Item({ itemDetail }: { itemDetail: ItemType }) {
-  const [isItemAddToCart, setIsItemAddToCart] = useState(false)
+  const dispatch = useAppDispatch()
 
   const handleOnClick = () => {
-    setIsItemAddToCart(true)
+    dispatch(addToCart(itemDetail))
   }
 
   return (
@@ -53,8 +55,8 @@ export default function Item({ itemDetail }: { itemDetail: ItemType }) {
         width={200}
         height={300}
       />
-      <Button text={'カートに追加'} />
-      <Link href={'/pages/cart'}>カートを確認/お会計に進む</Link>
+      <Button onClick={handleOnClick} text={'カートに追加'} />
+      <Link href={'/cart'}>カートを確認/お会計に進む</Link>
     </div>
   )
 }
