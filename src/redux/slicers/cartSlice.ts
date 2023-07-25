@@ -26,9 +26,15 @@ export const cartSlice = createSlice({
       state,
       action: PayloadAction<{ itemId: number; quantity: number }>
     ) => {
+      //そもそもquanityが0だったら画面から削除
+      if (action.payload.quantity === 0) {
+        state.items = state.items.filter(
+          (item) => item.id !== action.payload.itemId
+        )
+        return
+      }
       //quantityを変更したい商品をitemsの中からidで検索
       const item = state.items.find((item) => item.id === action.payload.itemId)
-
       if (item) {
         item.quantity = action.payload.quantity
       }
