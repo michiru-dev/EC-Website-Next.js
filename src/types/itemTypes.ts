@@ -6,8 +6,7 @@ export type ItemType = {
   category: string //unionに変える
   image: string
   rating: { rate: number; count: number }
+  quantity: number
 }
-
-export type CartItemType = ItemType & { quantity: number }
 
 export type ItemTypeArray = ItemType[]
