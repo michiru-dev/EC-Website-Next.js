@@ -8,4 +8,6 @@ export type ItemType = {
   rating: { rate: number; count: number }
 }
 
+export type CartItemType = ItemType & { quantity: number }
+
 export type ItemTypeArray = ItemType[]
