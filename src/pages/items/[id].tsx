@@ -3,7 +3,6 @@ import { ItemType } from '@/types/itemTypes'
 import Image from 'next/image'
 import Button from '@/components/Button'
 import { useState } from 'react'
-import Cart from '../cart'
 import Link from 'next/link'
 import { useAppDispatch } from '@/redux/hooks'
 import { addToCart } from '@/redux/slicers/cartSlice'
@@ -36,10 +35,18 @@ export async function getStaticProps({ params }: { params: ItemType }) {
 }
 
 export default function Item({ itemDetail }: { itemDetail: ItemType }) {
+  //何でここで型エラーが起きてない？
   const dispatch = useAppDispatch()
+  const [quantity, setQuantity] = useState(1)
+
+  const handleOnChange = (e: any) => {
+    setQuantity(e.target.value)
+  }
 
   const handleOnClick = () => {
-    dispatch(addToCart(itemDetail))
+    const item = { ...itemDetail, quantity }
+    dispatch(addToCart(item))
+    alert('カートに追加されました')
   }
 
   return (
@@ -54,6 +61,11 @@ export default function Item({ itemDetail }: { itemDetail: ItemType }) {
         alt={itemDetail.title}
         width={200}
         height={300}
+      />
+      <input
+        onChange={(e) => handleOnChange(e)}
+        type='number'
+        value={quantity}
       />
       <Button onClick={handleOnClick} text={'カートに追加'} />
       <Link href={'/cart'}>カートを確認/お会計に進む</Link>
