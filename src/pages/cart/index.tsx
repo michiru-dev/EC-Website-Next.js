@@ -26,9 +26,9 @@ function Cart() {
               <Image src={item.image} alt={item.title} width={50} height={50} />
               <p>${item.price * item.quantity}</p>
               <label htmlFor={`quantity-${item.id}`}>個数</label>
-              <input
+              <select
+                name={`quantity-${item.id}`}
                 id={`quantity-${item.id}`}
-                type='number'
                 value={item.quantity}
                 onChange={(e) =>
                   dispatch(
@@ -38,10 +38,22 @@ function Cart() {
                     })
                   )
                 }
-              />
+              >
+                <option value='0'>0(削除)</option>
+                <option value='1'>1</option>
+                <option value='2'>2</option>
+                <option value='3'>3</option>
+                <option value='4'>4</option>
+                <option value='5'>5</option>
+                <option value='6'>6</option>
+                <option value='7'>7</option>
+                <option value='8'>8</option>
+                <option value='9'>9</option>
+                <option value='10'>10</option>
+              </select>
               <Button
                 text={'カートから商品を削除'}
-                onClick={(e) => dispatch(removeItem({ itemId: item.id }))}
+                onClick={() => dispatch(removeItem({ itemId: item.id }))}
               />
             </li>
           )

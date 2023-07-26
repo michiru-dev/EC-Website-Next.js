@@ -46,7 +46,8 @@ export default function Item({ itemDetail }: { itemDetail: ItemType }) {
   const handleOnClick = () => {
     const item = { ...itemDetail, quantity }
     dispatch(addToCart(item))
-    alert('カートに追加されました')
+    alert(`カートに${quantity}点追加されました`)
+    setQuantity(0)
   }
 
   return (
@@ -62,11 +63,24 @@ export default function Item({ itemDetail }: { itemDetail: ItemType }) {
         width={200}
         height={300}
       />
-      <input
+      <label htmlFor={`quantity-${itemDetail.id}`}>個数</label>
+      <select
+        name={`quantity-${itemDetail.id}`}
+        id={`quantity-${itemDetail.id}`}
         onChange={(e) => handleOnChange(e)}
-        type='number'
         value={quantity}
-      />
+      >
+        <option value='1'>1</option>
+        <option value='2'>2</option>
+        <option value='3'>3</option>
+        <option value='4'>4</option>
+        <option value='5'>5</option>
+        <option value='6'>6</option>
+        <option value='7'>7</option>
+        <option value='8'>8</option>
+        <option value='9'>9</option>
+        <option value='10'>10</option>
+      </select>
       <Button onClick={handleOnClick} text={'カートに追加'} />
       <Link href={'/cart'}>カートを確認/お会計に進む</Link>
     </div>
