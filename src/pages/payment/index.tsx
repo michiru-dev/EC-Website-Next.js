@@ -1,12 +1,15 @@
 import CartItemsList from '@/components/CartItemsList'
-import { useAppSelector } from '@/redux/hooks'
+import { useAppDispatch, useAppSelector } from '@/redux/hooks'
+import { clearCart } from '@/redux/slicers/cartSlice'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
 import React, { useState, useEffect, useCallback } from 'react'
 
 function Payment() {
   const cartItems = useAppSelector((state) => state.cart.items)
+  const dispatch = useAppDispatch()
   const router = useRouter()
+
   const [cardInfo, setCardInfo] = useState({
     cardNumber: '',
     expireMonth: '',
@@ -22,7 +25,6 @@ function Payment() {
   ) => {
     //オブジェクトのkey名を変数で指定するなら[]が必要
     setCardInfo((prev) => ({ ...prev, [field]: e.target.value }))
-    validateCardInfo()
   }
 
   //そうまにきく
@@ -40,9 +42,10 @@ function Payment() {
   }, [validateCardInfo])
 
   //他にいいやり方？
-  const handleFormSubmit = async (e: any) => {
+  const handleFormSubmit = (e: any) => {
     e.preventDefault()
     router.push('/purchased')
+    dispatch(clearCart())
   }
 
   const currentYear = new Date().getFullYear()
@@ -58,16 +61,17 @@ function Payment() {
           <input
             onChange={(e) => handleOnchange(e, 'cardNumber')}
             type='text'
+            id='cardNumber'
           />
         </label>
 
         <div>
-          <label htmlFor='expireDate'>
-            有効期限
+          <label htmlFor='expireMonth'>
+            有効期限(月)
             <select
               onChange={(e) => handleOnchange(e, 'expireMonth')}
               name='expireDate'
-              id='expireDate'
+              id='expireMonth'
             >
               {months.map((month) => (
                 <option value={month} key={month}>
@@ -75,7 +79,10 @@ function Payment() {
                 </option>
               ))}
             </select>
-            ／
+          </label>
+          ／
+          <label htmlFor='expireYear'>
+            有効期限(年)
             <select
               onChange={(e) => handleOnchange(e, 'expireYear')}
               name='expireYear'
@@ -95,6 +102,7 @@ function Payment() {
           <input
             onChange={(e) => handleOnchange(e, 'cardHolder')}
             type='text'
+            id='cardHolder'
           />
         </label>
         <input type='submit' value='購入' disabled={!isCardInfoCorrect} />

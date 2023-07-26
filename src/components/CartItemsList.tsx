@@ -78,10 +78,7 @@ function CartItemsList({ itemsList, showControls }: CartItemsProps) {
                       />
                     </>
                   ) : (
-                    <>
-                      <label htmlFor={`quantity-${item.id}`}>個数</label>
-                      <p>{item.quantity}</p>
-                    </>
+                    <p>個数:{item.quantity}</p>
                   )}
                 </li>
               )
