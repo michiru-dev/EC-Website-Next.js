@@ -4,8 +4,11 @@ import Image from 'next/image'
 import Button from '@/components/Button'
 import { useState } from 'react'
 import Link from 'next/link'
-import { useAppDispatch } from '@/redux/hooks'
+import { useAppDispatch, useAppSelector } from '@/redux/hooks'
 import { addToCart } from '@/redux/slicers/cartSlice'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faCartShopping } from '@fortawesome/free-solid-svg-icons'
+import { AiOutlineShoppingCart } from 'react-icons/ai'
 
 export async function getStaticPaths() {
   const allItems = await axios
@@ -35,6 +38,13 @@ export async function getStaticProps({ params }: { params: ItemType }) {
 }
 
 export default function Item({ itemDetail }: { itemDetail: ItemType }) {
+  const cartItemsList = useAppSelector((state) => state.cart.items)
+  const totalItemsQuantity = cartItemsList.reduce((sum, item) => {
+    return sum + item.quantity
+  }, 0)
+
+  console.log(totalItemsQuantity)
+
   //何でここで型エラーが起きてない？
   const dispatch = useAppDispatch()
   const [quantity, setQuantity] = useState(1)
@@ -44,7 +54,7 @@ export default function Item({ itemDetail }: { itemDetail: ItemType }) {
   }
 
   const handleOnClick = () => {
-    const item = { ...itemDetail, quantity }
+    const item = { ...itemDetail, quantity: Number(quantity) }
     dispatch(addToCart(item))
     alert(`カートに${quantity}点追加されました`)
     setQuantity(0)
@@ -82,7 +92,13 @@ export default function Item({ itemDetail }: { itemDetail: ItemType }) {
         <option value='10'>10</option>
       </select>
       <Button onClick={handleOnClick} text={'カートに追加'} />
-      <Link href={'/cart'}>カートを確認/お会計に進む</Link>
+      <Link href={'/'}>☜商品一覧へ戻る</Link>
+      <Link href={'/cart'}>
+        {/* <FontAwesomeIcon icon={faCartShopping} /> */}
+        <AiOutlineShoppingCart />
+        <p>{totalItemsQuantity}</p>
+        カートを確認/お会計に進む
+      </Link>
     </div>
   )
 }

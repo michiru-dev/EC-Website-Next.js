@@ -17,6 +17,10 @@ function Cart() {
     return sum + item.price * item.quantity
   }, 0) //0は初期値
 
+  const totalItemsQuantity = cartItemsList.reduce((sum, item) => {
+    return sum + item.quantity
+  }, 0)
+
   return (
     <>
       {cartItemsList.length === 0 ? (
@@ -71,7 +75,9 @@ function Cart() {
           </ul>
 
           <h3>合計 ${totalAmount}</h3>
+          <h3>計 {totalItemsQuantity}点</h3>
           <Link href={'/payment'}>お支払い</Link>
+          <Link href={'/'}>☜商品一覧へ戻る</Link>
         </div>
       )}
     </>
