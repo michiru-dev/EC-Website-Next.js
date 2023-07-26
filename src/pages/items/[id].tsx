@@ -56,6 +56,8 @@ export default function Item({ itemDetail }: { itemDetail: ItemType }) {
     setQuantity(0)
   }
 
+  const quantityArr = Array.from({ length: 10 }, (_, i) => i + 1)
+
   return (
     <div>
       <h2>{itemDetail.title}</h2>
@@ -76,16 +78,13 @@ export default function Item({ itemDetail }: { itemDetail: ItemType }) {
         onChange={(e) => handleOnChange(e)}
         value={quantity}
       >
-        <option value='1'>1</option>
-        <option value='2'>2</option>
-        <option value='3'>3</option>
-        <option value='4'>4</option>
-        <option value='5'>5</option>
-        <option value='6'>6</option>
-        <option value='7'>7</option>
-        <option value='8'>8</option>
-        <option value='9'>9</option>
-        <option value='10'>10</option>
+        {quantityArr.map((num) => {
+          return (
+            <option key={num} value={num}>
+              {num}
+            </option>
+          )
+        })}
       </select>
       <Button onClick={handleOnClick} text={'カートに追加'} />
       <Link href={'/'}>☜商品一覧へ戻る</Link>
