@@ -1,10 +1,12 @@
 import CartItemsList from '@/components/CartItemsList'
 import { useAppSelector } from '@/redux/hooks'
 import Link from 'next/link'
+import { useRouter } from 'next/router'
 import React, { useState, useEffect, useCallback } from 'react'
 
 function Payment() {
   const cartItems = useAppSelector((state) => state.cart.items)
+  const router = useRouter()
   const [cardInfo, setCardInfo] = useState({
     cardNumber: '',
     expireMonth: '',
@@ -37,6 +39,12 @@ function Payment() {
     validateCardInfo()
   }, [validateCardInfo])
 
+  //他にいいやり方？
+  const handleFormSubmit = async (e: any) => {
+    e.preventDefault()
+    router.push('/purchased')
+  }
+
   const currentYear = new Date().getFullYear()
   //Array.fromで新しい配列を生成。長さは10,第二引数は生成する各要素に対して実行する関数
   const years = Array.from({ length: 10 }, (_, index) => currentYear + index)
@@ -44,7 +52,7 @@ function Payment() {
 
   return (
     <>
-      <form>
+      <form onSubmit={handleFormSubmit}>
         <label htmlFor='cardNumber'>
           カード番号
           <input
