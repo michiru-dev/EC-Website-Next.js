@@ -3,10 +3,10 @@ import { ItemType } from '@/types/itemTypes'
 import Image from 'next/image'
 import Button from '@/components/Button'
 import { useState } from 'react'
-import Cart from '../cart'
 import Link from 'next/link'
-import { useAppDispatch } from '@/redux/hooks'
+import { useAppDispatch, useAppSelector } from '@/redux/hooks'
 import { addToCart } from '@/redux/slicers/cartSlice'
+import MoveToCartButton from '@/components/MoveToCartButton'
 
 export async function getStaticPaths() {
   const allItems = await axios
@@ -36,10 +36,24 @@ export async function getStaticProps({ params }: { params: ItemType }) {
 }
 
 export default function Item({ itemDetail }: { itemDetail: ItemType }) {
+  const cartItemsList = useAppSelector((state) => state.cart.items)
+  const totalItemsQuantity = cartItemsList.reduce((sum, item) => {
+    return sum + item.quantity
+  }, 0)
+
+  //何でここで型エラーが起きてない？
   const dispatch = useAppDispatch()
+  const [quantity, setQuantity] = useState(1)
+
+  const handleOnChange = (e: any) => {
+    setQuantity(e.target.value)
+  }
 
   const handleOnClick = () => {
-    dispatch(addToCart(itemDetail))
+    const item = { ...itemDetail, quantity: Number(quantity) }
+    dispatch(addToCart(item))
+    alert(`カートに${quantity}点追加されました`)
+    setQuantity(0)
   }
 
   return (
@@ -55,8 +69,27 @@ export default function Item({ itemDetail }: { itemDetail: ItemType }) {
         width={200}
         height={300}
       />
+      <label htmlFor={`quantity-${itemDetail.id}`}>個数</label>
+      <select
+        name={`quantity-${itemDetail.id}`}
+        id={`quantity-${itemDetail.id}`}
+        onChange={(e) => handleOnChange(e)}
+        value={quantity}
+      >
+        <option value='1'>1</option>
+        <option value='2'>2</option>
+        <option value='3'>3</option>
+        <option value='4'>4</option>
+        <option value='5'>5</option>
+        <option value='6'>6</option>
+        <option value='7'>7</option>
+        <option value='8'>8</option>
+        <option value='9'>9</option>
+        <option value='10'>10</option>
+      </select>
       <Button onClick={handleOnClick} text={'カートに追加'} />
-      <Link href={'/cart'}>カートを確認/お会計に進む</Link>
+      <Link href={'/'}>☜商品一覧へ戻る</Link>
+      <MoveToCartButton />
     </div>
   )
 }
