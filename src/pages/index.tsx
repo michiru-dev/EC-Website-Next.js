@@ -7,6 +7,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faCartShopping } from '@fortawesome/free-solid-svg-icons'
 import { AiOutlineShoppingCart } from 'react-icons/ai'
 import { useAppSelector } from '@/redux/hooks'
+import MoveToCartButton from '@/components/MoveToCartButton'
 
 export const getStaticProps: GetStaticProps = async () => {
   const allItems = await axios
@@ -27,12 +28,7 @@ export default function Home({ allItems }: { allItems: ItemTypeArray }) {
 
   return (
     <>
-      <Link href={'/cart'}>
-        {/* <FontAwesomeIcon icon={faCartShopping} /> */}
-        <AiOutlineShoppingCart />
-        <p>{totalItemsQuantity}</p>
-        カートを確認/お会計に進む
-      </Link>
+      <MoveToCartButton />
       <ul>
         {allItems.map((item) => (
           <li key={item.id}>

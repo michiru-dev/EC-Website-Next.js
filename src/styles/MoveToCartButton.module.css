@@ -1,0 +1,26 @@
+/* .cartButtonDiv {
+  display: flex;
+  flex-direction: row;
+} */
+
+.link {
+  text-decoration: none;
+  display: flex;
+}
+
+.link:visited {
+  color: black;
+}
+
+.totalQuantity {
+  width: 25px;
+  height: 25px;
+  margin: 0;
+  background-color: rgba(255, 0, 0, 0.697);
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: white;
+  font-size: 13px;
+}

@@ -6,9 +6,7 @@ import { useState } from 'react'
 import Link from 'next/link'
 import { useAppDispatch, useAppSelector } from '@/redux/hooks'
 import { addToCart } from '@/redux/slicers/cartSlice'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faCartShopping } from '@fortawesome/free-solid-svg-icons'
-import { AiOutlineShoppingCart } from 'react-icons/ai'
+import MoveToCartButton from '@/components/MoveToCartButton'
 
 export async function getStaticPaths() {
   const allItems = await axios
@@ -42,8 +40,6 @@ export default function Item({ itemDetail }: { itemDetail: ItemType }) {
   const totalItemsQuantity = cartItemsList.reduce((sum, item) => {
     return sum + item.quantity
   }, 0)
-
-  console.log(totalItemsQuantity)
 
   //何でここで型エラーが起きてない？
   const dispatch = useAppDispatch()
@@ -93,12 +89,7 @@ export default function Item({ itemDetail }: { itemDetail: ItemType }) {
       </select>
       <Button onClick={handleOnClick} text={'カートに追加'} />
       <Link href={'/'}>☜商品一覧へ戻る</Link>
-      <Link href={'/cart'}>
-        {/* <FontAwesomeIcon icon={faCartShopping} /> */}
-        <AiOutlineShoppingCart />
-        <p>{totalItemsQuantity}</p>
-        カートを確認/お会計に進む
-      </Link>
+      <MoveToCartButton />
     </div>
   )
 }
