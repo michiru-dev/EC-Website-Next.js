@@ -1,7 +1,8 @@
 .headerDiv {
   display: flex;
   justify-content: space-between;
-  margin: 20px 30px 30px 30px;
+  margin: 0 30px 30px 30px;
+  padding-top: 20px;
 }
 
 .title {

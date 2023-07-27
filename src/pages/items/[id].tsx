@@ -6,6 +6,8 @@ import { useState } from 'react'
 import { useAppDispatch, useAppSelector } from '@/redux/hooks'
 import { addToCart } from '@/redux/slicers/cartSlice'
 import Layout from '@/components/Layout'
+import styles from '@/styles/[id].module.css'
+import StarRating from '@/components/StartRating'
 
 export async function getStaticPaths() {
   const allItems = await axios
@@ -59,33 +61,45 @@ export default function Item({ itemDetail }: { itemDetail: ItemType }) {
 
   return (
     <Layout>
-      <h2>{itemDetail.title}</h2>
-      <p>{itemDetail.description}</p>
-      <p>${itemDetail.price}</p>
-      <p>{itemDetail.rating.rate}</p>
-      <p>{itemDetail.rating.count}</p>
-      <Image
-        src={itemDetail.image}
-        alt={itemDetail.title}
-        width={200}
-        height={300}
-      />
-      <label htmlFor={`quantity-${itemDetail.id}`}>個数</label>
-      <select
-        name={`quantity-${itemDetail.id}`}
-        id={`quantity-${itemDetail.id}`}
-        onChange={(e) => handleOnChange(e)}
-        value={quantity}
-      >
-        {quantityArr.map((num) => {
-          return (
-            <option key={num} value={num}>
-              {num}
-            </option>
-          )
-        })}
-      </select>
-      <Button onClick={handleOnClick} text={'カートに追加'} />
+      <div className={styles.itemContainer}>
+        <div className={styles.itemImage}>
+          <Image
+            src={itemDetail.image}
+            alt={itemDetail.title}
+            width={200}
+            height={300}
+          />
+        </div>
+
+        <div className={styles.itemDetails}>
+          <h2>{itemDetail.title}</h2>
+          <StarRating rating={itemDetail.rating} />
+          <p>{itemDetail.description}</p>
+          <p className={styles.price}>${itemDetail.price}</p>
+
+          <label htmlFor={`quantity-${itemDetail.id}`}>個数:</label>
+          <select
+            name={`quantity-${itemDetail.id}`}
+            id={`quantity-${itemDetail.id}`}
+            onChange={(e) => handleOnChange(e)}
+            value={quantity}
+          >
+            {quantityArr.map((num) => {
+              return (
+                <option key={num} value={num}>
+                  {num}
+                </option>
+              )
+            })}
+          </select>
+
+          <Button
+            className={styles.button}
+            onClick={handleOnClick}
+            text={'カートに追加'}
+          />
+        </div>
+      </div>
     </Layout>
   )
 }

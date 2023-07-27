@@ -1,0 +1,33 @@
+.itemContainer {
+  display: flex;
+  justify-content: center;
+}
+
+.itemImage {
+  margin-right: 50px;
+}
+
+.itemDetails {
+  width: 500px;
+}
+
+.price {
+  font-size: 22px;
+  font-weight: bold;
+}
+
+.button {
+  background-color: orange;
+  transition: background-color 0.1s linear;
+  border: none;
+  border-radius: 10px;
+  font-family: 'M PLUS Rounded 1c', sans-serif;
+  width: 160px;
+  height: 30px;
+  margin-left: 10px;
+}
+
+.button:hover {
+  cursor: pointer;
+  background-color: rgb(237, 156, 5);
+}

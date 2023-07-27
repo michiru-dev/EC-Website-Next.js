@@ -20,21 +20,21 @@ export const getStaticProps: GetStaticProps = async () => {
 
 export default function Home({ allItems }: { allItems: ItemTypeArray }) {
   return (
-    <Layout>
-      <ul className={`${styles.itemUl}`}>
+    <Layout className={styles.layout}>
+      <ul className={styles.itemUl}>
         {allItems.map((item) => (
-          <li className={`${styles.itemList}`} key={item.id}>
-            <Link className={`${styles.link}`} href={`/items/${item.id}`}>
-              <div className={`${styles.itemDiv}`}>
-                <p className={`${styles.itemTitle}`}>{item.title}</p>
+          <li className={styles.itemList} key={item.id}>
+            <Link className={styles.link} href={`/items/${item.id}`}>
+              <div className={styles.itemDiv}>
+                <p className={styles.itemTitle}>{item.title}</p>
                 <Image
                   src={item.image}
                   alt={item.title}
                   width={150}
                   height={150}
                 />
-                <div className={`${styles.priceAndRatingDiv}`}>
-                  <p className={`${styles.itemPrice}`}>${item.price}</p>
+                <div className={styles.priceAndRatingDiv}>
+                  <p className={styles.itemPrice}>${item.price}</p>
                   <StarRating rating={item.rating} />
                 </div>
               </div>

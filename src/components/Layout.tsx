@@ -3,9 +3,14 @@ import Header from '@/components/Header'
 import Footer from '@/components/Footer'
 import styles from '@/styles/Footer.module.css'
 
-function Layout({ children }: { children: ReactNode }) {
+type LayoutProps = {
+  children: ReactNode
+  className?: string
+}
+
+function Layout({ children, className }: LayoutProps) {
   return (
-    <div className={`${styles.footerFixed}`}>
+    <div className={`${styles.footerFixed} ${className}`}>
       <Header />
       {children}
       <Footer />

@@ -10,10 +10,10 @@ function MoveToCartButton() {
     return sum + item.quantity
   }, 0)
   return (
-    <div className={`${styles.cartButtonDiv}`}>
-      <Link href={'/cart'} className={`${styles.link}`}>
+    <div className={styles.cartButtonDiv}>
+      <Link href={'/cart'} className={styles.link}>
         <AiOutlineShoppingCart size={40} />
-        <p className={`${styles.totalQuantity}`}>{totalItemsQuantity}</p>
+        <p className={styles.totalQuantity}>{totalItemsQuantity}</p>
       </Link>
     </div>
   )
