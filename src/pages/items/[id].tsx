@@ -7,6 +7,7 @@ import Link from 'next/link'
 import { useAppDispatch, useAppSelector } from '@/redux/hooks'
 import { addToCart } from '@/redux/slicers/cartSlice'
 import MoveToCartButton from '@/components/MoveToCartButton'
+import BackToHomeButton from '@/components/BackToHomeButton'
 
 export async function getStaticPaths() {
   const allItems = await axios
@@ -87,7 +88,7 @@ export default function Item({ itemDetail }: { itemDetail: ItemType }) {
         })}
       </select>
       <Button onClick={handleOnClick} text={'カートに追加'} />
-      <Link href={'/'}>☜商品一覧へ戻る</Link>
+      <BackToHomeButton />
       <MoveToCartButton />
     </div>
   )

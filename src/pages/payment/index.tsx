@@ -3,7 +3,7 @@ import { useAppDispatch, useAppSelector } from '@/redux/hooks'
 import { clearCart } from '@/redux/slicers/cartSlice'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
-import React, { useState, useEffect, useCallback } from 'react'
+import React, { useState, useMemo } from 'react'
 
 function Payment() {
   const cartItems = useAppSelector((state) => state.cart.items)
@@ -17,8 +17,6 @@ function Payment() {
     cardHolder: '',
   })
 
-  const [isCardInfoCorrect, setIsCardInfoCorrect] = useState(false)
-
   const handleOnchange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>,
     field: string
@@ -27,22 +25,15 @@ function Payment() {
     setCardInfo((prev) => ({ ...prev, [field]: e.target.value }))
   }
 
-  //そうまにきく
-  const validateCardInfo = useCallback(() => {
+  //cardInfoが更新された時に関数を実行してtrue/falseを返す
+  const isValidCardInfo = useMemo(() => {
     if (cardInfo.cardNumber === '00000000' && cardInfo.cardHolder !== '') {
-      setIsCardInfoCorrect(true)
-    } else {
-      setIsCardInfoCorrect(false)
+      return true
     }
+    return false
   }, [cardInfo])
 
-  // validateCardInfoが変更されたときに実行
-  useEffect(() => {
-    validateCardInfo()
-  }, [validateCardInfo])
-
-  //他にいいやり方？
-  const handleFormSubmit = (e: any) => {
+  const handleFormSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
     router.push('/purchased')
     dispatch(clearCart())
@@ -105,7 +96,9 @@ function Payment() {
             id='cardHolder'
           />
         </label>
-        <input type='submit' value='購入' disabled={!isCardInfoCorrect} />
+        {/* formの中のbuttonかinputにtype=submitがあればそれはまずボタンの見た目になって、
+        それをクリックするとformのonsubmitが着火される */}
+        <input type='submit' value='購入' disabled={!isValidCardInfo} />
       </form>
       <Link href={'/cart'}>☜カートへ戻る</Link>
       <CartItemsList itemsList={cartItems} showControls={false} />

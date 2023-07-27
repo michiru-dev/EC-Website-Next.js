@@ -12,7 +12,6 @@ function MoveToCartButton() {
   return (
     <div className={`${styles.cartButtonDiv}`}>
       <Link href={'/cart'} className={`${styles.link}`}>
-        {/* <FontAwesomeIcon icon={faCartShopping} /> */}
         <AiOutlineShoppingCart size={40} />
         <p className={`${styles.totalQuantity}`}>{totalItemsQuantity}</p>
         <p>カートを確認/お会計に進む</p>
