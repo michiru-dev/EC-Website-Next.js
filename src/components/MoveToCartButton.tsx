@@ -14,7 +14,6 @@ function MoveToCartButton() {
       <Link href={'/cart'} className={`${styles.link}`}>
         <AiOutlineShoppingCart size={40} />
         <p className={`${styles.totalQuantity}`}>{totalItemsQuantity}</p>
-        <p>カートを確認/お会計に進む</p>
       </Link>
     </div>
   )

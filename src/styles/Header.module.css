@@ -1,0 +1,22 @@
+.headerDiv {
+  display: flex;
+  justify-content: space-between;
+  margin: 20px 30px 30px 30px;
+}
+
+.title {
+  margin: 0;
+}
+
+.iconDiv {
+  display: flex;
+  gap: 5px;
+}
+
+.link {
+  text-decoration: none;
+}
+
+.link:visited {
+  color: black;
+}

@@ -3,9 +3,9 @@ import axios from 'axios'
 import { ItemTypeArray } from '@/types/itemTypes'
 import Link from 'next/link'
 import Image from 'next/image'
-import MoveToCartButton from '@/components/MoveToCartButton'
 import styles from '@/styles/Home.module.css'
 import StarRating from '@/components/StartRating'
+import Layout from '@/components/Layout'
 
 export const getStaticProps: GetStaticProps = async () => {
   const allItems = await axios
@@ -20,8 +20,7 @@ export const getStaticProps: GetStaticProps = async () => {
 
 export default function Home({ allItems }: { allItems: ItemTypeArray }) {
   return (
-    <>
-      <MoveToCartButton />
+    <Layout>
       <ul className={`${styles.itemUl}`}>
         {allItems.map((item) => (
           <li className={`${styles.itemList}`} key={item.id}>
@@ -43,6 +42,6 @@ export default function Home({ allItems }: { allItems: ItemTypeArray }) {
           </li>
         ))}
       </ul>
-    </>
+    </Layout>
   )
 }

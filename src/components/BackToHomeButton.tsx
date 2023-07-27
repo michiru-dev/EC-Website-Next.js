@@ -8,7 +8,6 @@ function BackToHomeButton() {
     <div>
       <Link className={`${styles.link}`} href={'/'}>
         <BiHomeAlt2 size={40} />
-        <p>ホームへ戻る</p>
       </Link>
     </div>
   )

@@ -1,11 +1,9 @@
 import { useAppDispatch } from '@/redux/hooks'
 import { ItemType, ItemTypeArray } from '@/types/itemTypes'
-import Link from 'next/link'
 import Image from 'next/image'
 import { removeItem, updateQuantity } from '@/redux/slicers/cartSlice'
 import Button from '@/components/Button'
 import EmptyCart from '@/components/EmptyCart'
-import BackToHomeButton from './BackToHomeButton'
 
 type CartItemsProps = {
   itemsList: ItemTypeArray
@@ -82,8 +80,6 @@ function CartItemsList({ itemsList, showControls }: CartItemsProps) {
 
       <h3>合計 ${totalAmount}</h3>
       <h3>計 {totalItemsQuantity}点</h3>
-
-      <BackToHomeButton />
     </div>
   )
 }

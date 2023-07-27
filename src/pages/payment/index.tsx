@@ -1,4 +1,5 @@
 import CartItemsList from '@/components/CartItemsList'
+import Layout from '@/components/Layout'
 import { useAppDispatch, useAppSelector } from '@/redux/hooks'
 import { clearCart } from '@/redux/slicers/cartSlice'
 import Link from 'next/link'
@@ -45,7 +46,7 @@ function Payment() {
   const months = Array.from({ length: 12 }, (_, i) => i + 1)
 
   return (
-    <>
+    <Layout>
       <form onSubmit={handleFormSubmit}>
         <label htmlFor='cardNumber'>
           カード番号
@@ -102,7 +103,7 @@ function Payment() {
       </form>
       <Link href={'/cart'}>☜カートへ戻る</Link>
       <CartItemsList itemsList={cartItems} showControls={false} />
-    </>
+    </Layout>
   )
 }
 

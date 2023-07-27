@@ -3,11 +3,9 @@ import { ItemType } from '@/types/itemTypes'
 import Image from 'next/image'
 import Button from '@/components/Button'
 import { useState } from 'react'
-import Link from 'next/link'
 import { useAppDispatch, useAppSelector } from '@/redux/hooks'
 import { addToCart } from '@/redux/slicers/cartSlice'
-import MoveToCartButton from '@/components/MoveToCartButton'
-import BackToHomeButton from '@/components/BackToHomeButton'
+import Layout from '@/components/Layout'
 
 export async function getStaticPaths() {
   const allItems = await axios
@@ -60,7 +58,7 @@ export default function Item({ itemDetail }: { itemDetail: ItemType }) {
   const quantityArr = Array.from({ length: 10 }, (_, i) => i + 1)
 
   return (
-    <div>
+    <Layout>
       <h2>{itemDetail.title}</h2>
       <p>{itemDetail.description}</p>
       <p>${itemDetail.price}</p>
@@ -88,8 +86,6 @@ export default function Item({ itemDetail }: { itemDetail: ItemType }) {
         })}
       </select>
       <Button onClick={handleOnClick} text={'カートに追加'} />
-      <BackToHomeButton />
-      <MoveToCartButton />
-    </div>
+    </Layout>
   )
 }
