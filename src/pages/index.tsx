@@ -5,6 +5,7 @@ import Link from 'next/link'
 import Image from 'next/image'
 import MoveToCartButton from '@/components/MoveToCartButton'
 import styles from '@/styles/Home.module.css'
+import StarRating from '@/components/StartRating'
 
 export const getStaticProps: GetStaticProps = async () => {
   const allItems = await axios
@@ -30,10 +31,13 @@ export default function Home({ allItems }: { allItems: ItemTypeArray }) {
                 <Image
                   src={item.image}
                   alt={item.title}
-                  width={130}
-                  height={130}
+                  width={150}
+                  height={150}
                 />
-                <p>${item.price}</p>
+                <div className={`${styles.priceAndRatingDiv}`}>
+                  <p className={`${styles.itemPrice}`}>${item.price}</p>
+                  <StarRating rating={item.rating} />
+                </div>
               </div>
             </Link>
           </li>
