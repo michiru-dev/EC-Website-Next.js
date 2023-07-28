@@ -1,5 +1,6 @@
 import CartItemsList from '@/components/CartItemsList'
 import Layout from '@/components/Layout'
+import { useTotalAmount } from '@/hooks/useTotalAmount'
 import { useAppDispatch, useAppSelector } from '@/redux/hooks'
 import { clearCart } from '@/redux/slicers/cartSlice'
 import Link from 'next/link'
@@ -10,6 +11,7 @@ function Payment() {
   const cartItems = useAppSelector((state) => state.cart.items)
   const dispatch = useAppDispatch()
   const router = useRouter()
+  const { totalAmount, totalItemsQuantity } = useTotalAmount(cartItems)
 
   const [cardInfo, setCardInfo] = useState({
     cardNumber: '',
@@ -59,7 +61,7 @@ function Payment() {
 
         <div>
           <label htmlFor='expireMonth'>
-            有効期限(月)
+            有効期限
             <select
               onChange={(e) => handleOnchange(e, 'expireMonth')}
               name='expireDate'
@@ -67,14 +69,14 @@ function Payment() {
             >
               {months.map((month) => (
                 <option value={month} key={month}>
-                  {month}月
+                  {month}
                 </option>
               ))}
             </select>
+            月
           </label>
           ／
           <label htmlFor='expireYear'>
-            有効期限(年)
             <select
               onChange={(e) => handleOnchange(e, 'expireYear')}
               name='expireYear'
@@ -82,10 +84,11 @@ function Payment() {
             >
               {years.map((year) => (
                 <option value={year} key={year}>
-                  {year}年
+                  {year}
                 </option>
               ))}
             </select>
+            年
           </label>
         </div>
 
@@ -102,6 +105,8 @@ function Payment() {
         <input type='submit' value='購入' disabled={!isValidCardInfo} />
       </form>
       <Link href={'/cart'}>☜カートへ戻る</Link>
+      <p>合計 {totalItemsQuantity}点</p>
+      <p>${totalAmount}</p>
       <CartItemsList itemsList={cartItems} showControls={false} />
     </Layout>
   )

@@ -6,7 +6,7 @@ import styles from '@/styles/BackToHomeButton.module.css'
 function BackToHomeButton() {
   return (
     <div>
-      <Link className={`${styles.link}`} href={'/'}>
+      <Link className={styles.link} href={'/'}>
         <BiHomeAlt2 size={40} />
       </Link>
     </div>

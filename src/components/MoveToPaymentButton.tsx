@@ -6,12 +6,10 @@ import styles from '@/styles/MoveToPaymentButton.module.css'
 
 function MoveToPaymentButton() {
   return (
-    <div>
-      <Link className={`${styles.link}`} href={'/payment'}>
-        <MdOutlinePayment size={40} />
-        <p>お支払い情報入力</p>
-      </Link>
-    </div>
+    <Link className={styles.link} href={'/payment'}>
+      {/* <MdOutlinePayment size={40} /> */}
+      <p className={styles.title}>お支払い情報入力</p>
+    </Link>
   )
 }
 

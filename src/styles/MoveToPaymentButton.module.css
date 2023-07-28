@@ -1,8 +1,27 @@
 .link {
   text-decoration: none;
   display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: orange;
+  transition: background-color 0.1s linear;
+  border: none;
+  border-radius: 10px;
+  font-family: 'M PLUS Rounded 1c', sans-serif;
+  width: 200px;
+  height: 35px;
+  margin-left: 10px;
+}
+
+.link:hover {
+  cursor: pointer;
+  background-color: rgb(237, 156, 5);
 }
 
 .link:visited {
   color: black;
+}
+
+.title {
+  margin: 0;
 }

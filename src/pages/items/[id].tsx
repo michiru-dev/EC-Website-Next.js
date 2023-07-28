@@ -54,7 +54,7 @@ export default function Item({ itemDetail }: { itemDetail: ItemType }) {
     const item = { ...itemDetail, quantity: Number(quantity) }
     dispatch(addToCart(item))
     alert(`カートに${quantity}点追加されました`)
-    setQuantity(0)
+    setQuantity(1)
   }
 
   const quantityArr = Array.from({ length: 10 }, (_, i) => i + 1)

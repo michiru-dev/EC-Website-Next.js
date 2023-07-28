@@ -1,0 +1,39 @@
+.itemContainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-bottom: 1px solid rgba(177, 177, 177, 0.347);
+  margin-bottom: 20px;
+  padding-bottom: 20px;
+}
+
+.itemImage {
+  margin-right: 50px;
+}
+
+.itemDetails {
+  width: 500px;
+}
+
+.button {
+  background-color: rgba(173, 172, 172, 0.161);
+  transition: background-color 0.1s linear;
+  border: none;
+  border-radius: 10px;
+  font-family: 'M PLUS Rounded 1c', sans-serif;
+  width: fit-content;
+  height: fit-content;
+  margin-left: 10px;
+  font-size: 10px;
+  color: rgba(0, 0, 0, 0.526);
+}
+
+.button:hover {
+  cursor: pointer;
+  color: black;
+  background-color: rgba(255, 0, 0, 0.171);
+}
+
+.ul {
+  padding: 0;
+}

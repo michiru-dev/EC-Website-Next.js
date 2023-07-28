@@ -7,7 +7,6 @@
   grid-template-columns: repeat(3, 350px);
   /* repeatは 1fr 1fr 1fr;これと同じ */
   grid-gap: 1rem;
-  list-style: none;
   padding: 0;
   justify-content: center;
 }

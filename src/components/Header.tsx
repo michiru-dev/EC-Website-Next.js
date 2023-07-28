@@ -7,18 +7,18 @@ import Link from 'next/link'
 
 function Header() {
   return (
-    <Link className={`${styles.link}`} href={'/'}>
-      <div className={`${styles.headerDiv}`}>
+    <div className={`${styles.headerDiv}`}>
+      <Link className={styles.link} href={'/'}>
         <h1 className={`${styles.title}`}>
           HokoHoko Shopping&nbsp;
           <FaDog />
         </h1>
-        <div className={`${styles.iconDiv}`}>
-          <BackToHomeButton />
-          <MoveToCartButton />
-        </div>
+      </Link>
+      <div className={`${styles.iconDiv}`}>
+        <BackToHomeButton />
+        <MoveToCartButton />
       </div>
-    </Link>
+    </div>
   )
 }
 
