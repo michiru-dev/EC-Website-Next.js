@@ -1,0 +1,140 @@
+.outerDiv {
+  display: flex;
+  margin: 0 50px;
+}
+
+.form {
+  width: 70%;
+  display: flex;
+  justify-content: center;
+}
+.formContent {
+  text-align: left;
+}
+
+.rightBar {
+  width: 25%;
+  height: 80vh;
+  overflow-y: auto;
+  /* overflow-yautoはコンテンツが上のheightを超えた場合にスクロールにする */
+}
+
+.input {
+  width: 150px;
+  height: 20px;
+}
+
+.cardNumLabel,
+.expireDateLabel {
+  display: block;
+  position: relative; //tooltipのため
+  margin-bottom: 10px;
+}
+
+.expireDateDiv {
+  width: 250px;
+  display: flex;
+}
+
+.button {
+  display: block;
+  margin-top: 20px;
+  background-color: orange;
+  transition: background-color 0.1s linear;
+  border: none;
+  border-radius: 10px;
+  font-family: 'M PLUS Rounded 1c', sans-serif;
+  width: 240px;
+  height: 30px;
+  margin-left: 10px;
+}
+
+.button:hover {
+  cursor: pointer;
+  background-color: rgb(237, 156, 5);
+}
+
+.button:disabled {
+  background-color: rgba(167, 165, 165, 0.379);
+}
+
+.button:disabled:hover {
+  cursor: default;
+  background-color: rgba(167, 165, 165, 0.379);
+}
+
+.tooltipForCardNum {
+  display: flex;
+  align-items: center;
+  position: absolute;
+  top: -27%;
+  left: 103%;
+  z-index: 10;
+  padding: 2px 8px;
+  margin: 8px auto 0 auto;
+  font-size: small;
+  color: white;
+  white-space: break-spaces;
+  background-color: rgb(124, 134, 242);
+  opacity: 0;
+  transition: opacity 0.3s ease-in-out;
+  border-radius: 5px;
+  width: 209px;
+
+  &:before {
+    content: '';
+    position: absolute;
+    display: block;
+    top: 25%;
+    left: 0;
+    width: 8px;
+    height: 8px;
+    background-color: rgb(124, 134, 242);
+    z-index: 0;
+    transform: rotate(-45deg) translateX(-50%);
+  }
+}
+
+.input:focus + .tooltipForCardNum {
+  opacity: 1;
+}
+
+.tooltipForCardHolder {
+  display: flex;
+  align-items: center;
+  position: absolute;
+  top: -27%;
+  left: 103%;
+  z-index: 10;
+  padding: 2px 8px;
+  margin: 8px auto 0 auto;
+  font-size: small;
+  color: white;
+  white-space: break-spaces;
+  background-color: rgb(124, 134, 242);
+  opacity: 0;
+  transition: opacity 0.3s ease-in-out;
+  border-radius: 5px;
+  width: 172px;
+
+  &:before {
+    content: '';
+    position: absolute;
+    display: block;
+    top: 25%;
+    left: 0;
+    width: 8px;
+    height: 8px;
+    background-color: rgb(124, 134, 242);
+    z-index: 0;
+    transform: rotate(-45deg) translateX(-50%);
+  }
+}
+
+.input:focus + .tooltipForCardHolder {
+  opacity: 1;
+}
+
+.cardHolderLabel {
+  position: relative;
+}

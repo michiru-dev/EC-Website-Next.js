@@ -5,10 +5,10 @@ import Layout from '@/components/Layout'
 import EmptyCart from '@/components/EmptyCart'
 import { useTotalAmount } from '@/hooks/useTotalAmount'
 import styles from '@/styles/Cart.module.css'
+import TotalAmountAndQuantity from '@/components/TotalAmountAndQuantity'
 
 function Cart() {
   const cartItems = useAppSelector((state) => state.cart.items)
-  const { totalAmount, totalItemsQuantity } = useTotalAmount(cartItems)
 
   //空のカートはここで表示
   if (cartItems.length === 0) {
@@ -22,11 +22,7 @@ function Cart() {
     <Layout>
       <div className={styles.outerDiv}>
         <div className={styles.totalAndButtonDiv}>
-          <div className={styles.totalDiv}>
-            <p className={styles.totalQuantity}>合計 {totalItemsQuantity}点:</p>
-            <p className={styles.totalAmount}>${totalAmount}</p>
-          </div>
-
+          <TotalAmountAndQuantity cartItems={cartItems} />
           <MoveToPaymentButton />
         </div>
         <CartItemsList itemsList={cartItems} showControls={true} />
