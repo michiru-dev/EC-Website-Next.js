@@ -23,3 +23,36 @@
 .link:hover .totalQuantity {
   background-color: rgba(255, 0, 0, 0.348);
 }
+
+// @keyframes slide {
+//   0% {
+//     transform: translateY(-100%);
+//     opacity: 0;
+//   }
+//   50% {
+//     transform: translateY(0);
+//     opacity: 1;
+//   }
+//   100% {
+//     transform: translateY(-100%);
+//     opacity: 0;
+//   }
+// }
+
+// .alert {
+//   position: fixed;
+//   top: 0;
+//   left: 0;
+//   right: 0;
+//   padding: 16px;
+//   background-color: #f44336;
+//   color: white;
+//   text-align: center;
+//   z-index: 1000;
+//   transform: translateY(-100%);
+//   opacity: 0;
+// }
+
+// .alert.animate {
+//   animation: slide 3s forwards;
+// }

@@ -2,7 +2,7 @@ import axios from 'axios'
 import { ItemType } from '@/types/itemTypes'
 import Image from 'next/image'
 import Button from '@/components/Button'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { useAppDispatch, useAppSelector } from '@/redux/hooks'
 import { addToCart } from '@/redux/slicers/cartSlice'
 import Layout from '@/components/Layout'
@@ -37,14 +37,10 @@ export async function getStaticProps({ params }: { params: ItemType }) {
 }
 
 export default function Item({ itemDetail }: { itemDetail: ItemType }) {
-  const cartItemsList = useAppSelector((state) => state.cart.items)
-  const totalItemsQuantity = cartItemsList.reduce((sum, item) => {
-    return sum + item.quantity
-  }, 0)
-
   //何でここで型エラーが起きてない？
   const dispatch = useAppDispatch()
   const [quantity, setQuantity] = useState(1)
+  const [showAlert, setShowAlert] = useState(false) // 1. アラート表示の状態を追加
 
   const handleOnChange = (e: any) => {
     setQuantity(e.target.value)
@@ -53,11 +49,23 @@ export default function Item({ itemDetail }: { itemDetail: ItemType }) {
   const handleOnClick = () => {
     const item = { ...itemDetail, quantity: Number(quantity) }
     dispatch(addToCart(item))
-    alert(`カートに${quantity}点追加されました`)
     setQuantity(1)
+    setShowAlert(true)
   }
 
   const quantityArr = Array.from({ length: 10 }, (_, i) => i + 1)
+
+  useEffect(() => {
+    if (showAlert) {
+      const timer = setTimeout(() => {
+        setShowAlert(false)
+      }, 3000) // 3 秒後に非表示にする
+
+      return () => {
+        clearTimeout(timer)
+      }
+    }
+  }, [showAlert])
 
   return (
     <Layout>
@@ -70,7 +78,10 @@ export default function Item({ itemDetail }: { itemDetail: ItemType }) {
             height={300}
           />
         </div>
-
+        {showAlert && (
+          <div className={styles.alert}>カートに商品が追加されました</div>
+        )}
+        {/* 4. 状態に基づいてアラートを表示 */}
         <div className={styles.itemDetails}>
           <h2>{itemDetail.title}</h2>
           <StarRating rating={itemDetail.rating} />

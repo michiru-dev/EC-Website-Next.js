@@ -31,3 +31,46 @@
   cursor: pointer;
   background-color: rgb(237, 156, 5);
 }
+
+@keyframes slide {
+  0% {
+    transform: translateY(-100%);
+    opacity: 0;
+  }
+
+  25% {
+    transform: translateY(0);
+    opacity: 1;
+  }
+
+  50% {
+    transform: translateY(0);
+    opacity: 1;
+  }
+
+  75% {
+    transform: translateY(0);
+    opacity: 1;
+  }
+
+  100% {
+    transform: translateY(-100%);
+    opacity: 0;
+  }
+}
+.alert {
+  width: 300px;
+  margin: 0 auto;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  padding: 16px;
+  background-color: #4242ecb0;
+  color: white;
+  text-align: center;
+  z-index: 1000;
+  transform: translateY(-100%);
+  opacity: 0;
+  animation: slide 3s forwards;
+}
