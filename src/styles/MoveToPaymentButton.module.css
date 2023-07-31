@@ -1,5 +1,4 @@
 .link {
-  text-decoration: none;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -16,10 +15,6 @@
 .link:hover {
   cursor: pointer;
   background-color: rgb(237, 156, 5);
-}
-
-.link:visited {
-  color: black;
 }
 
 .title {

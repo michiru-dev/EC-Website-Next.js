@@ -6,7 +6,7 @@ import { useState } from 'react'
 import { useAppDispatch, useAppSelector } from '@/redux/hooks'
 import { addToCart } from '@/redux/slicers/cartSlice'
 import Layout from '@/components/Layout'
-import styles from '@/styles/[id].module.css'
+import styles from '@/styles/[id].module.scss'
 import StarRating from '@/components/StartRating'
 
 export async function getStaticPaths() {

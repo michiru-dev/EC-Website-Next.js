@@ -1,8 +1,7 @@
 .link {
-  text-decoration: none;
   display: flex;
+  transition: all 0.3s ease;
 }
-
-.link:visited {
-  color: black;
+.link:hover {
+  color: grey;
 }

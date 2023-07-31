@@ -3,7 +3,6 @@ import CartItemsList from '@/components/CartItemsList'
 import MoveToPaymentButton from '@/components/MoveToPaymentButton'
 import Layout from '@/components/Layout'
 import EmptyCart from '@/components/EmptyCart'
-import { useTotalAmount } from '@/hooks/useTotalAmount'
 import styles from '@/styles/Cart.module.css'
 import TotalAmountAndQuantity from '@/components/TotalAmountAndQuantity'
 

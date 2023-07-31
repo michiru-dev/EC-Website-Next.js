@@ -2,7 +2,7 @@ import { useAppSelector } from '@/redux/hooks'
 import Link from 'next/link'
 import React from 'react'
 import { AiOutlineShoppingCart } from 'react-icons/ai'
-import styles from '@/styles/MoveToCartButton.module.css'
+import styles from '@/styles/MoveToCartButton.module.scss'
 
 function MoveToCartButton() {
   const cartItemsList = useAppSelector((state) => state.cart.items)

@@ -1,15 +1,5 @@
-/* .cartButtonDiv {
-  display: flex;
-  flex-direction: row;
-} */
-
 .link {
-  text-decoration: none;
   display: flex;
-}
-
-.link:visited {
-  color: black;
 }
 
 .totalQuantity {
@@ -23,4 +13,13 @@
   align-items: center;
   color: white;
   font-size: 13px;
+  transition: background-color 0.3s ease;
+}
+
+.link:hover svg {
+  color: grey;
+}
+
+.link:hover .totalQuantity {
+  background-color: rgba(255, 0, 0, 0.348);
 }

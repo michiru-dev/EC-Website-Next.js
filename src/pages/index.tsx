@@ -3,7 +3,7 @@ import axios from 'axios'
 import { ItemTypeArray } from '@/types/itemTypes'
 import Link from 'next/link'
 import Image from 'next/image'
-import styles from '@/styles/Home.module.css'
+import styles from '@/styles/Home.module.scss'
 import StarRating from '@/components/StartRating'
 import Layout from '@/components/Layout'
 
