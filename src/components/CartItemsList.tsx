@@ -4,6 +4,7 @@ import Image from 'next/image'
 import { removeItem, updateQuantity } from '@/redux/slicers/cartSlice'
 import Button from '@/components/Button'
 import styles from '@/styles/CartItemsList.module.css'
+import { useMemo } from 'react'
 
 type CartItemsProps = {
   itemsList: ItemTypeArray
@@ -14,12 +15,16 @@ type CartItemsProps = {
 function CartItemsList({ itemsList, showControls }: CartItemsProps) {
   const dispatch = useAppDispatch()
 
-  const quantityArr = Array.from({ length: 10 }, (_, i) => i + 1)
-
   return (
     <div>
       <ul className={styles.ul}>
         {itemsList.map((item: ItemType) => {
+          //math.maxで数字の大きい方の数字をmaxに代入
+          const maxQuantity = Math.max(10, item.quantity)
+          const quantityArr = Array.from(
+            { length: maxQuantity },
+            (_, i) => i + 1
+          )
           return (
             <li key={item.id}>
               <div className={styles.itemContainer}>

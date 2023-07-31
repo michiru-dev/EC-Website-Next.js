@@ -9,23 +9,19 @@ import TotalAmountAndQuantity from '@/components/TotalAmountAndQuantity'
 function Cart() {
   const cartItems = useAppSelector((state) => state.cart.items)
 
-  //空のカートはここで表示
-  if (cartItems.length === 0) {
-    return (
-      <Layout>
-        <EmptyCart />
-      </Layout>
-    )
-  }
   return (
     <Layout>
-      <div className={styles.outerDiv}>
-        <div className={styles.totalAndButtonDiv}>
-          <TotalAmountAndQuantity cartItems={cartItems} />
-          <MoveToPaymentButton />
+      {cartItems.length === 0 ? (
+        <EmptyCart />
+      ) : (
+        <div className={styles.outerDiv}>
+          <div className={styles.totalAndButtonDiv}>
+            <TotalAmountAndQuantity cartItems={cartItems} />
+            <MoveToPaymentButton />
+          </div>
+          <CartItemsList itemsList={cartItems} showControls={true} />
         </div>
-        <CartItemsList itemsList={cartItems} showControls={true} />
-      </div>
+      )}
     </Layout>
   )
 }

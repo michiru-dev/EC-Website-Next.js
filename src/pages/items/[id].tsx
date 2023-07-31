@@ -40,7 +40,7 @@ export default function Item({ itemDetail }: { itemDetail: ItemType }) {
   //何でここで型エラーが起きてない？
   const dispatch = useAppDispatch()
   const [quantity, setQuantity] = useState(1)
-  const [showAlert, setShowAlert] = useState(false) // 1. アラート表示の状態を追加
+  const [showAlert, setShowAlert] = useState(false)
 
   const handleOnChange = (e: any) => {
     setQuantity(e.target.value)
@@ -59,7 +59,7 @@ export default function Item({ itemDetail }: { itemDetail: ItemType }) {
     if (showAlert) {
       const timer = setTimeout(() => {
         setShowAlert(false)
-      }, 3000) // 3 秒後に非表示にする
+      }, 3000)
 
       return () => {
         clearTimeout(timer)
