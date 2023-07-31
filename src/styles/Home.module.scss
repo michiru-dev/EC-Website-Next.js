@@ -1,0 +1,67 @@
+.layout {
+  background-color: rgba(194, 191, 191, 0.163);
+}
+
+.itemUl {
+  display: grid;
+  grid-template-columns: repeat(3, 350px);
+  /* repeatは 1fr 1fr 1fr;これと同じ */
+  grid-gap: 1rem;
+  padding: 0;
+  justify-content: center;
+}
+
+.link {
+  color: black;
+
+  &:visited {
+    color: grey;
+  }
+}
+
+.itemList {
+  width: 350px;
+  height: 300px;
+  background-color: white;
+  border-radius: 10px;
+  box-shadow: 0 0 3px 0 rgba(0, 0, 0, 0.12), 0 2px 3px 0 rgba(0, 0, 0, 0.22);
+  transition: 0.3s;
+
+  &:hover {
+    box-shadow: 0 15px 30px -5px rgba(0, 0, 0, 0.15), 0 0 5px rgba(0, 0, 0, 0.1);
+    transform: translateY(-4px);
+  }
+}
+
+.itemDiv {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  /* justifyが主軸 */
+}
+
+.itemTitle {
+  width: 100%;
+  font-weight: bold;
+  text-align: left;
+  margin: 0;
+  padding: 15px;
+  box-sizing: border-box;
+}
+
+.itemPrice {
+  font-size: 18px;
+  font-weight: 600;
+  margin: 0;
+}
+
+.priceAndRatingDiv {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  padding: 10px;
+  box-sizing: border-box;
+  /* padding分が幅に加算されるのを防ぐためboxsizing */
+}

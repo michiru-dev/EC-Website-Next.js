@@ -1,12 +1,15 @@
-import Link from 'next/link'
 import React from 'react'
+import styles from '@/styles/EmptyCart.module.scss'
+import Link from 'next/link'
 
 function EmptyCart() {
   return (
-    <>
-      <h3>カートは空です</h3>
-      <Link href={'/'}>商品一覧へ戻る</Link>
-    </>
+    <div className={styles.emptyCartDiv}>
+      <p>カートは空です</p>
+      <Link className={styles.backButton} href={'/'}>
+        商品を探す
+      </Link>
+    </div>
   )
 }
 

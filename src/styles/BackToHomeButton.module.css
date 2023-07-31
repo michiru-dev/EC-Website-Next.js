@@ -1,0 +1,7 @@
+.link {
+  display: flex;
+  transition: all 0.3s ease;
+}
+.link:hover {
+  color: grey;
+}

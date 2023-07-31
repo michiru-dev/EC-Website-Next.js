@@ -3,11 +3,9 @@ import axios from 'axios'
 import { ItemTypeArray } from '@/types/itemTypes'
 import Link from 'next/link'
 import Image from 'next/image'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faCartShopping } from '@fortawesome/free-solid-svg-icons'
-import { AiOutlineShoppingCart } from 'react-icons/ai'
-import { useAppSelector } from '@/redux/hooks'
-import MoveToCartButton from '@/components/MoveToCartButton'
+import styles from '@/styles/Home.module.scss'
+import StarRating from '@/components/StartRating'
+import Layout from '@/components/Layout'
 
 export const getStaticProps: GetStaticProps = async () => {
   const allItems = await axios
@@ -21,32 +19,29 @@ export const getStaticProps: GetStaticProps = async () => {
 }
 
 export default function Home({ allItems }: { allItems: ItemTypeArray }) {
-  const cartItemsList = useAppSelector((state) => state.cart.items)
-  const totalItemsQuantity = cartItemsList.reduce((sum, item) => {
-    return sum + item.quantity
-  }, 0)
-
   return (
-    <>
-      <MoveToCartButton />
-      <ul>
+    <Layout className={styles.layout}>
+      <ul className={styles.itemUl}>
         {allItems.map((item) => (
-          <li key={item.id}>
-            <Link href={`/items/${item.id}`}>
-              <div>
-                {item.title}
+          <li className={styles.itemList} key={item.id}>
+            <Link className={styles.link} href={`/items/${item.id}`}>
+              <div className={styles.itemDiv}>
+                <p className={styles.itemTitle}>{item.title}</p>
                 <Image
                   src={item.image}
                   alt={item.title}
-                  width={100}
-                  height={100}
+                  width={150}
+                  height={150}
                 />
-                <p>${item.price}</p>
+                <div className={styles.priceAndRatingDiv}>
+                  <p className={styles.itemPrice}>${item.price}</p>
+                  <StarRating rating={item.rating} />
+                </div>
               </div>
             </Link>
           </li>
         ))}
       </ul>
-    </>
+    </Layout>
   )
 }

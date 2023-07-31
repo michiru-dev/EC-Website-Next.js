@@ -1,0 +1,23 @@
+.headerDiv {
+  display: flex;
+  justify-content: space-between;
+  margin: 0 30px 30px 30px;
+  padding-top: 20px;
+}
+
+.title {
+  margin: 0;
+}
+
+.iconDiv {
+  display: flex;
+  gap: 5px;
+}
+
+.link {
+  transition: color 0.3s ease-out 0s;
+
+  :hover {
+    color: grey;
+  }
+}

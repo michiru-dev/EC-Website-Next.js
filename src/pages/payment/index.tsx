@@ -1,9 +1,12 @@
 import CartItemsList from '@/components/CartItemsList'
+import Layout from '@/components/Layout'
 import { useAppDispatch, useAppSelector } from '@/redux/hooks'
 import { clearCart } from '@/redux/slicers/cartSlice'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
-import React, { useState, useEffect, useCallback } from 'react'
+import React, { useState, useMemo } from 'react'
+import styles from '@/styles/Payment.module.scss'
+import TotalAmountAndQuantity from '@/components/TotalAmountAndQuantity'
 
 function Payment() {
   const cartItems = useAppSelector((state) => state.cart.items)
@@ -17,8 +20,6 @@ function Payment() {
     cardHolder: '',
   })
 
-  const [isCardInfoCorrect, setIsCardInfoCorrect] = useState(false)
-
   const handleOnchange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>,
     field: string
@@ -27,22 +28,15 @@ function Payment() {
     setCardInfo((prev) => ({ ...prev, [field]: e.target.value }))
   }
 
-  //そうまにきく
-  const validateCardInfo = useCallback(() => {
+  //cardInfoが更新された時に関数を実行してtrue/falseを返す
+  const isValidCardInfo = useMemo(() => {
     if (cardInfo.cardNumber === '00000000' && cardInfo.cardHolder !== '') {
-      setIsCardInfoCorrect(true)
-    } else {
-      setIsCardInfoCorrect(false)
+      return true
     }
+    return false
   }, [cardInfo])
 
-  // validateCardInfoが変更されたときに実行
-  useEffect(() => {
-    validateCardInfo()
-  }, [validateCardInfo])
-
-  //他にいいやり方？
-  const handleFormSubmit = (e: any) => {
+  const handleFormSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
     router.push('/purchased')
     dispatch(clearCart())
@@ -54,62 +48,85 @@ function Payment() {
   const months = Array.from({ length: 12 }, (_, i) => i + 1)
 
   return (
-    <>
-      <form onSubmit={handleFormSubmit}>
-        <label htmlFor='cardNumber'>
-          カード番号
-          <input
-            onChange={(e) => handleOnchange(e, 'cardNumber')}
-            type='text'
-            id='cardNumber'
-          />
-        </label>
+    <Layout>
+      <div className={styles.outerDiv}>
+        <form onSubmit={handleFormSubmit} className={styles.form}>
+          <div className={styles.formContent}>
+            <label htmlFor='cardNumber' className={styles.cardNumLabel}>
+              カード番号&emsp;
+              <input
+                className={styles.input}
+                onChange={(e) => handleOnchange(e, 'cardNumber')}
+                type='text'
+                id='cardNumber'
+              />
+              <div className={styles.tooltipForCardNum}>
+                「00000000」と入力してください
+              </div>
+            </label>
 
-        <div>
-          <label htmlFor='expireMonth'>
-            有効期限(月)
-            <select
-              onChange={(e) => handleOnchange(e, 'expireMonth')}
-              name='expireDate'
-              id='expireMonth'
-            >
-              {months.map((month) => (
-                <option value={month} key={month}>
-                  {month}月
-                </option>
-              ))}
-            </select>
-          </label>
-          ／
-          <label htmlFor='expireYear'>
-            有効期限(年)
-            <select
-              onChange={(e) => handleOnchange(e, 'expireYear')}
-              name='expireYear'
-              id='expireYear'
-            >
-              {years.map((year) => (
-                <option value={year} key={year}>
-                  {year}年
-                </option>
-              ))}
-            </select>
-          </label>
+            <div className={styles.expireDateDiv}>
+              <label htmlFor='expireMonth' className={styles.expireDateLabel}>
+                有効期限&emsp;&emsp;
+                <select
+                  onChange={(e) => handleOnchange(e, 'expireMonth')}
+                  name='expireDate'
+                  id='expireMonth'
+                >
+                  {months.map((month) => (
+                    <option value={month} key={month}>
+                      {month}
+                    </option>
+                  ))}
+                </select>
+                月
+              </label>
+              ／
+              <label htmlFor='expireYear' className={styles.label}>
+                <select
+                  onChange={(e) => handleOnchange(e, 'expireYear')}
+                  name='expireYear'
+                  id='expireYear'
+                >
+                  {years.map((year) => (
+                    <option value={year} key={year}>
+                      {year}
+                    </option>
+                  ))}
+                </select>
+                年
+              </label>
+            </div>
+
+            <label htmlFor='cardHolder' className={styles.cardHolderLabel}>
+              カード名義人
+              <input
+                className={styles.input}
+                onChange={(e) => handleOnchange(e, 'cardHolder')}
+                type='text'
+                id='cardHolder'
+              />
+              <div className={styles.tooltipForCardHolder}>
+                一文字以上入力してください
+              </div>
+            </label>
+            {/* formの中のbuttonかinputにtype=submitがあればそれはまずボタンの見た目になって、
+        それをクリックするとformのonsubmitが着火される */}
+            <input
+              className={styles.button}
+              type='submit'
+              value='購入'
+              disabled={!isValidCardInfo}
+            />
+          </div>
+        </form>
+        {/* <Link href={'/cart'}>☜カートへ戻る</Link> */}
+        <div className={styles.rightBar}>
+          <TotalAmountAndQuantity cartItems={cartItems} />
+          <CartItemsList itemsList={cartItems} showControls={false} />
         </div>
-
-        <label htmlFor='cardHolder'>
-          カード名義人
-          <input
-            onChange={(e) => handleOnchange(e, 'cardHolder')}
-            type='text'
-            id='cardHolder'
-          />
-        </label>
-        <input type='submit' value='購入' disabled={!isCardInfoCorrect} />
-      </form>
-      <Link href={'/cart'}>☜カートへ戻る</Link>
-      <CartItemsList itemsList={cartItems} showControls={false} />
-    </>
+      </div>
+    </Layout>
   )
 }
 

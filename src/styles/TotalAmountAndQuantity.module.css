@@ -1,0 +1,18 @@
+.totalDiv {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  width: 200px;
+  border-bottom: solid 2px grey;
+}
+
+.totalAmount {
+  font-size: 20px;
+  margin: 0;
+  font-weight: bold;
+}
+
+.totalQuantity {
+  font-size: 17px;
+  margin: 0;
+}

@@ -2,11 +2,12 @@ import axios from 'axios'
 import { ItemType } from '@/types/itemTypes'
 import Image from 'next/image'
 import Button from '@/components/Button'
-import { useState } from 'react'
-import Link from 'next/link'
+import { useEffect, useState } from 'react'
 import { useAppDispatch, useAppSelector } from '@/redux/hooks'
 import { addToCart } from '@/redux/slicers/cartSlice'
-import MoveToCartButton from '@/components/MoveToCartButton'
+import Layout from '@/components/Layout'
+import styles from '@/styles/[id].module.scss'
+import StarRating from '@/components/StartRating'
 
 export async function getStaticPaths() {
   const allItems = await axios
@@ -36,14 +37,10 @@ export async function getStaticProps({ params }: { params: ItemType }) {
 }
 
 export default function Item({ itemDetail }: { itemDetail: ItemType }) {
-  const cartItemsList = useAppSelector((state) => state.cart.items)
-  const totalItemsQuantity = cartItemsList.reduce((sum, item) => {
-    return sum + item.quantity
-  }, 0)
-
   //何でここで型エラーが起きてない？
   const dispatch = useAppDispatch()
   const [quantity, setQuantity] = useState(1)
+  const [showAlert, setShowAlert] = useState(false)
 
   const handleOnChange = (e: any) => {
     setQuantity(e.target.value)
@@ -52,43 +49,68 @@ export default function Item({ itemDetail }: { itemDetail: ItemType }) {
   const handleOnClick = () => {
     const item = { ...itemDetail, quantity: Number(quantity) }
     dispatch(addToCart(item))
-    alert(`カートに${quantity}点追加されました`)
-    setQuantity(0)
+    setQuantity(1)
+    setShowAlert(true)
   }
 
   const quantityArr = Array.from({ length: 10 }, (_, i) => i + 1)
 
+  useEffect(() => {
+    if (showAlert) {
+      const timer = setTimeout(() => {
+        setShowAlert(false)
+      }, 3000)
+
+      return () => {
+        clearTimeout(timer)
+      }
+    }
+  }, [showAlert])
+
   return (
-    <div>
-      <h2>{itemDetail.title}</h2>
-      <p>{itemDetail.description}</p>
-      <p>${itemDetail.price}</p>
-      <p>{itemDetail.rating.rate}</p>
-      <p>{itemDetail.rating.count}</p>
-      <Image
-        src={itemDetail.image}
-        alt={itemDetail.title}
-        width={200}
-        height={300}
-      />
-      <label htmlFor={`quantity-${itemDetail.id}`}>個数</label>
-      <select
-        name={`quantity-${itemDetail.id}`}
-        id={`quantity-${itemDetail.id}`}
-        onChange={(e) => handleOnChange(e)}
-        value={quantity}
-      >
-        {quantityArr.map((num) => {
-          return (
-            <option key={num} value={num}>
-              {num}
-            </option>
-          )
-        })}
-      </select>
-      <Button onClick={handleOnClick} text={'カートに追加'} />
-      <Link href={'/'}>☜商品一覧へ戻る</Link>
-      <MoveToCartButton />
-    </div>
+    <Layout>
+      <div className={styles.itemContainer}>
+        <div className={styles.itemImage}>
+          <Image
+            src={itemDetail.image}
+            alt={itemDetail.title}
+            width={200}
+            height={300}
+          />
+        </div>
+        {showAlert && (
+          <div className={styles.alert}>カートに商品が追加されました</div>
+        )}
+        {/* 4. 状態に基づいてアラートを表示 */}
+        <div className={styles.itemDetails}>
+          <h2>{itemDetail.title}</h2>
+          <StarRating rating={itemDetail.rating} />
+          <p>{itemDetail.description}</p>
+          <p className={styles.price}>${itemDetail.price}</p>
+
+          <label htmlFor={`quantity-${itemDetail.id}`}>個数:</label>
+          <select
+            name={`quantity-${itemDetail.id}`}
+            id={`quantity-${itemDetail.id}`}
+            onChange={(e) => handleOnChange(e)}
+            value={quantity}
+          >
+            {quantityArr.map((num) => {
+              return (
+                <option key={num} value={num}>
+                  {num}
+                </option>
+              )
+            })}
+          </select>
+
+          <Button
+            className={styles.button}
+            onClick={handleOnClick}
+            text={'カートに追加'}
+          />
+        </div>
+      </div>
+    </Layout>
   )
 }
