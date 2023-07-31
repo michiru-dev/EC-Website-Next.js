@@ -1,0 +1,17 @@
+.emptyCartDiv {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  p {
+    font-size: 20px;
+  }
+}
+
+.backButton {
+  border-bottom: 1px solid;
+
+  &:hover {
+    color: grey;
+  }
+}

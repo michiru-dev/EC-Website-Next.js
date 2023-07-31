@@ -4,7 +4,6 @@ import Image from 'next/image'
 import { removeItem, updateQuantity } from '@/redux/slicers/cartSlice'
 import Button from '@/components/Button'
 import styles from '@/styles/CartItemsList.module.css'
-import { useMemo } from 'react'
 
 type CartItemsProps = {
   itemsList: ItemTypeArray
