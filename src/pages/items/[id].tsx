@@ -57,8 +57,8 @@ export default function Item({ itemDetail }: { itemDetail: ItemType }) {
   const [quantity, setQuantity] = useState(1)
   const [showAlert, setShowAlert] = useState(false)
 
-  const handleOnChange = (e: any) => {
-    setQuantity(e.target.value)
+  const handleOnChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
+    setQuantity(parseInt(e.target.value))
   }
 
   const handleOnClick = () => {
