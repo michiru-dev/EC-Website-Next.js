@@ -96,7 +96,6 @@ export default function Item({ itemDetail }: { itemDetail: ItemType }) {
         {showAlert && (
           <div className={styles.alert}>カートに商品が追加されました</div>
         )}
-        {/* 4. 状態に基づいてアラートを表示 */}
         <div className={styles.itemDetails}>
           <h2>{itemDetail.title}</h2>
           <StarRating rating={itemDetail.rating} />
