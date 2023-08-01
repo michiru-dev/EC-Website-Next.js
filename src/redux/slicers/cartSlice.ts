@@ -36,6 +36,7 @@ export const cartSlice = createSlice({
         state.items = state.items.filter(
           (item) => item.id !== action.payload.itemId
         )
+        localStorage.setItem('itemsList', JSON.stringify(state.items))
         return
       }
       //quantityを変更したい商品をitemsの中からidで検索
@@ -43,15 +44,18 @@ export const cartSlice = createSlice({
       if (item) {
         item.quantity = action.payload.quantity
       }
+      localStorage.setItem('itemsList', JSON.stringify(state.items))
     },
     removeItem: (state, action) => {
       //idが一致しない商品のリストをitemsに代入
       state.items = state.items.filter(
         (item) => item.id !== action.payload.itemId
       )
+      localStorage.setItem('itemsList', JSON.stringify(state.items))
     },
     clearCart: (state) => {
       state.items = []
+      localStorage.setItem('itemsList', JSON.stringify(state.items))
     },
   },
 })
