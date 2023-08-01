@@ -1,5 +1,5 @@
 import React from 'react'
-import styles from '@/styles/TotalAmountAndQuantity.module.css'
+import styles from '@/components/UI/TotalAmountAndQuantity/TotalAmountAndQuantity.module.scss'
 import { useTotalAmount } from '@/hooks/useTotalAmount'
 import { ItemTypeArray } from '@/types/itemTypes'
 

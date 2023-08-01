@@ -1,8 +1,8 @@
 import React from 'react'
 import { FaDog } from 'react-icons/fa'
-import MoveToCartButton from './MoveToCartButton'
-import BackToHomeButton from './BackToHomeButton'
-import styles from '@/styles/Header.module.scss'
+import MoveToCartButton from '../MoveToCartButton'
+import BackToHomeButton from '../BackToHomeButton'
+import styles from '@/components/UI/Header/Header.module.scss'
 import Link from 'next/link'
 
 function Header() {

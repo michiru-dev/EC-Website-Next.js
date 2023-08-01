@@ -2,8 +2,8 @@ import { useAppDispatch } from '@/redux/hooks'
 import { ItemType, ItemTypeArray } from '@/types/itemTypes'
 import Image from 'next/image'
 import { removeItem, updateQuantity } from '@/redux/slicers/cartSlice'
-import Button from '@/components/Button'
-import styles from '@/styles/CartItemsList.module.css'
+import Button from '@/components/UI/Button'
+import styles from '@/components/UI/CartItemsList/CartItemsList.module.scss'
 
 type CartItemsProps = {
   itemsList: ItemTypeArray
