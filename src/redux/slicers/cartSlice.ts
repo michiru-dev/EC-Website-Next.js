@@ -24,9 +24,8 @@ export const cartSlice = createSlice({
       } else {
         state.items.push(action.payload)
       }
-      const existingList = JSON.parse(localStorage.getItem('itemsList') ?? '[]')
-      existingList.push(action.payload)
-      localStorage.setItem('itemsList', JSON.stringify(existingList))
+
+      localStorage.setItem('itemsList', JSON.stringify(state.items))
     },
     updateQuantity: (
       state,

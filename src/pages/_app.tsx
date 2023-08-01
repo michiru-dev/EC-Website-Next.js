@@ -8,6 +8,7 @@ import { ReactNode, useEffect } from 'react'
 import { useAppDispatch } from '@/redux/hooks'
 import { initialSet } from '@/redux/slicers/cartSlice'
 
+//redux系はProviderの中でしか使えないからAppの中では定義できない
 const LocalStorageProvider = ({ children }: { children: ReactNode }) => {
   const dispatch = useAppDispatch()
   useEffect(() => {
