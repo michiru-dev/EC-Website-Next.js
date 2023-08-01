@@ -12,6 +12,7 @@ export const getStaticProps: GetStaticProps = async () => {
     const allItems = await axios
       .get('https://fakestoreapi.com/products')
       .then((res) => res.data)
+      .catch()
 
     return {
       props: {

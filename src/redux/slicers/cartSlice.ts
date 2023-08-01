@@ -1,4 +1,4 @@
-import { ItemType } from '@/types/itemTypes'
+import { ItemType, ItemTypeArray } from '@/types/itemTypes'
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 
 type CartState = {
@@ -13,6 +13,9 @@ export const cartSlice = createSlice({
   name: 'cart',
   initialState,
   reducers: {
+    initialSet: (state, action: PayloadAction<ItemTypeArray>) => {
+      state.items = action.payload
+    },
     addToCart: (state, action: PayloadAction<ItemType>) => {
       //すでにitemsに同じ商品があるかどうか確認
       const item = state.items.find((item) => item.id === action.payload.id)
@@ -21,6 +24,9 @@ export const cartSlice = createSlice({
       } else {
         state.items.push(action.payload)
       }
+      const existingList = JSON.parse(localStorage.getItem('itemsList') ?? '[]')
+      existingList.push(action.payload)
+      localStorage.setItem('itemsList', JSON.stringify(existingList))
     },
     updateQuantity: (
       state,
@@ -51,6 +57,6 @@ export const cartSlice = createSlice({
   },
 })
 
-export const { addToCart, updateQuantity, removeItem, clearCart } =
+export const { initialSet, addToCart, updateQuantity, removeItem, clearCart } =
   cartSlice.actions
 export default cartSlice.reducer
