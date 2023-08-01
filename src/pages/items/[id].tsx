@@ -3,36 +3,51 @@ import { ItemType } from '@/types/itemTypes'
 import Image from 'next/image'
 import Button from '@/components/Button'
 import { useEffect, useState } from 'react'
-import { useAppDispatch, useAppSelector } from '@/redux/hooks'
+import { useAppDispatch } from '@/redux/hooks'
 import { addToCart } from '@/redux/slicers/cartSlice'
 import Layout from '@/components/Layout'
 import styles from '@/styles/[id].module.scss'
 import StarRating from '@/components/StartRating'
 
 export async function getStaticPaths() {
-  const allItems = await axios
-    .get('https://fakestoreapi.com/products')
-    .then((res) => res.data)
+  try {
+    const allItems = await axios
+      .get('https://fakestoreapi.com/products')
+      .then((res) => res.data)
 
-  const paths = allItems.map((item: ItemType) => {
-    return { params: { id: `${item.id}` } }
-  })
+    const paths = allItems.map((item: ItemType) => {
+      return { params: { id: `${item.id}` } }
+    })
 
-  return {
-    paths,
-    fallback: false,
+    return {
+      paths,
+      fallback: false,
+    }
+  } catch (error) {
+    console.error('パス取得失敗:', error)
+    return {
+      paths: [],
+      fallback: false,
+    }
   }
 }
 
 export async function getStaticProps({ params }: { params: ItemType }) {
-  const itemDetail = await axios
-    .get(`https://fakestoreapi.com/products/${params.id}`)
-    .then((res) => res.data)
+  try {
+    const itemDetail = await axios
+      .get(`https://fakestoreapi.com/products/${params.id}`)
+      .then((res) => res.data)
 
-  return {
-    props: {
-      itemDetail,
-    },
+    return {
+      props: {
+        itemDetail,
+      },
+    }
+  } catch (error) {
+    console.error('ページ取得失敗:', error)
+    return {
+      notFound: true,
+    }
   }
 }
 

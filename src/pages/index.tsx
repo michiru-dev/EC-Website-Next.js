@@ -8,13 +8,22 @@ import StarRating from '@/components/StartRating'
 import Layout from '@/components/Layout'
 
 export const getStaticProps: GetStaticProps = async () => {
-  const allItems = await axios
-    .get('https://fakestoreapi.com/products')
-    .then((res) => res.data)
-  return {
-    props: {
-      allItems,
-    },
+  try {
+    const allItems = await axios
+      .get('https://fakestoreapi.com/products')
+      .then((res) => res.data)
+
+    return {
+      props: {
+        allItems,
+      },
+    }
+  } catch (error) {
+    console.error('APIエラー:', error)
+
+    return {
+      notFound: true, // これでNext.jsは404ページを表示
+    }
   }
 }
 
