@@ -1,5 +1,5 @@
 import { FaStar } from 'react-icons/fa'
-import styles from '@/styles/StarRating.module.css'
+import styles from '@/components/UI/StarRating/StarRating.module.scss'
 
 type StarRatingProps = {
   rating: { rate: number; count: number }

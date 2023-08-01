@@ -1,5 +1,5 @@
 import React from 'react'
-import styles from '@/styles/EmptyCart.module.scss'
+import styles from '@/components/UI/EmptyCart/EmptyCart.module.scss'
 import Link from 'next/link'
 
 function EmptyCart() {
