@@ -14,12 +14,14 @@ export default function Home({ allItems }: { allItems: ItemTypeArray }) {
             <Link className={styles.link} href={`/items/${item.id}`}>
               <div className={styles.itemDiv}>
                 <p className={styles.itemTitle}>{item.title}</p>
-                <Image
-                  src={item.image}
-                  alt={item.title}
-                  width={150}
-                  height={150}
-                />
+                <div className={styles.imageWrapper}>
+                  <Image
+                    src={item.image}
+                    alt={item.title}
+                    width={150}
+                    height={150}
+                  />
+                </div>
                 <div className={styles.priceAndRatingDiv}>
                   <p className={styles.itemPrice}>${item.price}</p>
                   <StarRating rating={item.rating} />

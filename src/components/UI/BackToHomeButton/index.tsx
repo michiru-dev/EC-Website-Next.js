@@ -7,7 +7,7 @@ function BackToHomeButton() {
   return (
     <div>
       <Link className={styles.link} href={'/'}>
-        <BiHomeAlt2 size={40} />
+        <BiHomeAlt2 className={styles.svg} />
       </Link>
     </div>
   )

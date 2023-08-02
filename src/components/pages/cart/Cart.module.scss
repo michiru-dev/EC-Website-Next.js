@@ -10,3 +10,9 @@
   width: 500px;
   margin-bottom: 10px;
 }
+
+@media (max-width: 599px) {
+  .totalAndButtonDiv {
+    width: 350px;
+  }
+}

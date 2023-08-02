@@ -11,3 +11,9 @@
 .backButton:hover {
   color: grey;
 }
+
+@media (max-width: 599px) {
+  .text {
+    font-size: 20px;
+  }
+}

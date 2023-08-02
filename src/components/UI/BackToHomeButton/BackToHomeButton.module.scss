@@ -5,3 +5,13 @@
 .link:hover {
   color: grey;
 }
+
+.svg {
+  font-size: 40px;
+}
+
+@media (max-width: 599px) {
+  .svg {
+    font-size: 27px;
+  }
+}

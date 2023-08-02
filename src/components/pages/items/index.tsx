@@ -53,32 +53,34 @@ export default function Item({ itemDetail }: { itemDetail: ItemType }) {
           <div className={styles.alert}>カートに商品が追加されました</div>
         )}
         <div className={styles.itemDetails}>
-          <h2>{itemDetail.title}</h2>
+          <h2 className={styles.itemTitle}>{itemDetail.title}</h2>
           <StarRating rating={itemDetail.rating} />
           <p>{itemDetail.description}</p>
           <p className={styles.price}>${itemDetail.price}</p>
 
-          <label htmlFor={`quantity-${itemDetail.id}`}>個数:</label>
-          <select
-            name={`quantity-${itemDetail.id}`}
-            id={`quantity-${itemDetail.id}`}
-            onChange={(e) => handleOnChange(e)}
-            value={quantity}
-          >
-            {quantityArr.map((num) => {
-              return (
-                <option key={num} value={num}>
-                  {num}
-                </option>
-              )
-            })}
-          </select>
+          <div className={styles.QuantityAndButton}>
+            <label htmlFor={`quantity-${itemDetail.id}`}>個数:</label>
+            <select
+              name={`quantity-${itemDetail.id}`}
+              id={`quantity-${itemDetail.id}`}
+              onChange={(e) => handleOnChange(e)}
+              value={quantity}
+            >
+              {quantityArr.map((num) => {
+                return (
+                  <option key={num} value={num}>
+                    {num}
+                  </option>
+                )
+              })}
+            </select>
 
-          <Button
-            className={styles.button}
-            onClick={handleOnClick}
-            text={'カートに追加'}
-          />
+            <Button
+              className={styles.button}
+              onClick={handleOnClick}
+              text={'カートに追加'}
+            />
+          </div>
         </div>
       </div>
     </Layout>

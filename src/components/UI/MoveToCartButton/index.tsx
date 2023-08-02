@@ -12,7 +12,8 @@ function MoveToCartButton() {
   return (
     <div className={styles.cartButtonDiv}>
       <Link href={'/cart'} className={styles.link}>
-        <AiOutlineShoppingCart className={styles.svg} size={40} />
+        <AiOutlineShoppingCart className={styles.svg} />
+
         <p className={styles.totalQuantity}>{totalItemsQuantity}</p>
       </Link>
     </div>
