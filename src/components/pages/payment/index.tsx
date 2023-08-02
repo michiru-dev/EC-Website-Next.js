@@ -37,14 +37,20 @@ function Payment() {
 
   const handleFormSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
-    router.push('/purchased')
-    dispatch(clearCart())
+    router.push('/purchased').then(() => {
+      dispatch(clearCart())
+    })
   }
 
   const currentYear = new Date().getFullYear()
   //Array.fromで新しい配列を生成。長さは10,第二引数は生成する各要素に対して実行する関数
   const years = Array.from({ length: 10 }, (_, index) => currentYear + index)
   const months = Array.from({ length: 12 }, (_, i) => i + 1)
+
+  if (cartItems.length === 0) {
+    router.push('/')
+    return
+  }
 
   return (
     <Layout>
