@@ -138,3 +138,44 @@
 .cardHolderLabel {
   position: relative;
 }
+
+@media (max-width: 599px) {
+  .outerDiv {
+    flex-direction: column;
+    align-items: center;
+    margin: 0 0;
+  }
+
+  .form {
+    margin-bottom: 10px;
+  }
+
+  .rightBar {
+    width: 350px;
+    height: auto;
+    overflow-y: hidden;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .tooltipForCardNum {
+    top: 93%;
+    left: 22%;
+    &:before {
+      top: 0;
+      left: 50%;
+      transform: rotate(-45deg) translateX(50%);
+    }
+  }
+
+  .tooltipForCardHolder {
+    top: 93%;
+    left: 32%;
+    &:before {
+      top: 0;
+      left: 50%;
+      transform: rotate(-45deg) translateX(50%);
+    }
+  }
+}
