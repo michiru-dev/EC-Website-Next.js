@@ -15,6 +15,5 @@ ECサイトです。
 #### デプロイ
 - Vercel
 
-![ezgif com-video-to-gif (2)](https://github.com/michiru-dev/EC-Website-Next.js/assets/105535906/0825554f-585c-4400-90c9-d99c8aca3c69)
-
+![ezgif com-video-to-gif (3)](https://github.com/michiru-dev/EC-Website-Next.js/assets/105535906/305b0326-2698-4743-b901-3eca01dd7b39)
 
