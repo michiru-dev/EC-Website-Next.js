@@ -3,7 +3,7 @@ import Layout from '@/components/UI/Layout'
 import { useAppDispatch, useAppSelector } from '@/redux/hooks'
 import { clearCart } from '@/redux/slicers/cartSlice'
 import { useRouter } from 'next/router'
-import React, { useState, useMemo } from 'react'
+import React, { useState, useMemo, useEffect } from 'react'
 import styles from '@/components/pages/payment/Payment.module.scss'
 import TotalAmountAndQuantity from '@/components/UI/TotalAmountAndQuantity'
 
@@ -48,10 +48,12 @@ function Payment() {
   const years = Array.from({ length: 10 }, (_, index) => currentYear + index)
   const months = Array.from({ length: 12 }, (_, i) => i + 1)
 
-  if (cartItems.length === 0) {
-    router.push('/')
-    return
-  }
+  //useeffectに入れないとサーバーサイドでrouterにアクセスがかかりエラーになる
+  useEffect(() => {
+    if (cartItems.length === 0) {
+      router.push('/')
+    }
+  }, [cartItems, router])
 
   return (
     <Layout>
