@@ -12,9 +12,35 @@
   width: 500px;
 }
 
+.PriceAndQuantityAndButton {
+  margin-bottom: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
 .price {
   font-size: 22px;
   font-weight: bold;
+  margin: 0;
+}
+
+.link {
+  border-bottom: 1px solid;
+  background-color: rgba(227, 231, 228, 0.711);
+  transition: background-color 0.1s linear;
+  border: none;
+  border-radius: 10px;
+  font-family: 'M PLUS Rounded 1c', sans-serif;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 30px;
+  width: 250px;
+  font-size: 14px;
+  &:hover {
+    background-color: #4242ec57;
+  }
 }
 
 .button {
@@ -99,5 +125,9 @@
   .price {
     margin-top: 0;
     margin-bottom: 5px;
+  }
+
+  .PriceAndQuantityAndButton {
+    flex-direction: column;
   }
 }

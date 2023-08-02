@@ -29,7 +29,8 @@ function Payment() {
 
   //cardInfoが更新された時に関数を実行してtrue/falseを返す
   const isValidCardInfo = useMemo(() => {
-    if (cardInfo.cardNumber === '00000000' && cardInfo.cardHolder !== '') {
+    const regex = /^\d{14,16}$/
+    if (regex.test(cardInfo.cardNumber) && cardInfo.cardHolder !== '') {
       return true
     }
     return false
@@ -66,7 +67,7 @@ function Payment() {
                 id='cardNumber'
               />
               <div className={styles.tooltipForCardNum}>
-                「00000000」と入力してください
+                任意の数字14~16桁を入力してください
               </div>
             </label>
 

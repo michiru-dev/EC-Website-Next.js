@@ -7,6 +7,7 @@ import { addToCart } from '@/redux/slicers/cartSlice'
 import Layout from '@/components/UI/Layout'
 import styles from '@/components/pages/items/[id].module.scss'
 import StarRating from '@/components/UI/StarRating'
+import Link from 'next/link'
 
 export default function Item({ itemDetail }: { itemDetail: ItemType }) {
   const dispatch = useAppDispatch()
@@ -56,31 +57,37 @@ export default function Item({ itemDetail }: { itemDetail: ItemType }) {
           <h2 className={styles.itemTitle}>{itemDetail.title}</h2>
           <StarRating rating={itemDetail.rating} />
           <p>{itemDetail.description}</p>
-          <p className={styles.price}>${itemDetail.price}</p>
 
-          <div className={styles.QuantityAndButton}>
-            <label htmlFor={`quantity-${itemDetail.id}`}>個数:</label>
-            <select
-              name={`quantity-${itemDetail.id}`}
-              id={`quantity-${itemDetail.id}`}
-              onChange={(e) => handleOnChange(e)}
-              value={quantity}
-            >
-              {quantityArr.map((num) => {
-                return (
-                  <option key={num} value={num}>
-                    {num}
-                  </option>
-                )
-              })}
-            </select>
+          <div className={styles.PriceAndQuantityAndButton}>
+            <p className={styles.price}>${itemDetail.price}</p>
 
-            <Button
-              className={styles.button}
-              onClick={handleOnClick}
-              text={'カートに追加'}
-            />
+            <div className={styles.QuantityAndButton}>
+              <label htmlFor={`quantity-${itemDetail.id}`}>個数:</label>
+              <select
+                name={`quantity-${itemDetail.id}`}
+                id={`quantity-${itemDetail.id}`}
+                onChange={(e) => handleOnChange(e)}
+                value={quantity}
+              >
+                {quantityArr.map((num) => {
+                  return (
+                    <option key={num} value={num}>
+                      {num}
+                    </option>
+                  )
+                })}
+              </select>
+
+              <Button
+                className={styles.button}
+                onClick={handleOnClick}
+                text={'カートに追加'}
+              />
+            </div>
           </div>
+          <Link className={styles.link} href={'/cart'}>
+            カートを確認／お会計に進む
+          </Link>
         </div>
       </div>
     </Layout>
