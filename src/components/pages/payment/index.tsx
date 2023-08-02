@@ -3,7 +3,7 @@ import Layout from '@/components/UI/Layout'
 import { useAppDispatch, useAppSelector } from '@/redux/hooks'
 import { clearCart } from '@/redux/slicers/cartSlice'
 import { useRouter } from 'next/router'
-import React, { useState, useMemo } from 'react'
+import React, { useState, useMemo, useEffect } from 'react'
 import styles from '@/components/pages/payment/Payment.module.scss'
 import TotalAmountAndQuantity from '@/components/UI/TotalAmountAndQuantity'
 
@@ -29,7 +29,8 @@ function Payment() {
 
   //cardInfoが更新された時に関数を実行してtrue/falseを返す
   const isValidCardInfo = useMemo(() => {
-    if (cardInfo.cardNumber === '00000000' && cardInfo.cardHolder !== '') {
+    const regex = /^\d{14,16}$/
+    if (regex.test(cardInfo.cardNumber) && cardInfo.cardHolder !== '') {
       return true
     }
     return false
@@ -47,10 +48,12 @@ function Payment() {
   const years = Array.from({ length: 10 }, (_, index) => currentYear + index)
   const months = Array.from({ length: 12 }, (_, i) => i + 1)
 
-  if (cartItems.length === 0) {
-    router.push('/')
-    return
-  }
+  //useeffectに入れないとサーバーサイドでrouterにアクセスがかかりエラーになる
+  useEffect(() => {
+    if (cartItems.length === 0) {
+      router.push('/')
+    }
+  }, [cartItems, router])
 
   return (
     <Layout>
@@ -66,7 +69,7 @@ function Payment() {
                 id='cardNumber'
               />
               <div className={styles.tooltipForCardNum}>
-                「00000000」と入力してください
+                任意の数字14~16桁を入力してください
               </div>
             </label>
 
