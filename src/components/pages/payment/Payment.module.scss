@@ -37,6 +37,7 @@
 }
 
 .button {
+  color: black;
   display: block;
   margin-top: 20px;
   background-color: orange;
@@ -55,6 +56,7 @@
 }
 
 .button:disabled {
+  color: rgba(0, 0, 0, 0.236);
   background-color: rgba(167, 165, 165, 0.379);
 }
 
