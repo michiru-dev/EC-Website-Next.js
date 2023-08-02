@@ -1,0 +1,24 @@
+.div {
+  display: flex;
+  align-items: center;
+  justify-content: right;
+  margin-right: 50px;
+}
+
+.select {
+  border: none;
+  border-bottom: 1px solid;
+  height: 40px;
+  font-size: 15px;
+  width: 150px;
+  background-color: inherit;
+  text-align: center;
+  color: black;
+}
+
+@media (max-width: 599px) {
+  .div {
+    justify-content: center;
+    margin-right: 0;
+  }
+}
