@@ -1,9 +1,8 @@
 import { render, screen } from '@testing-library/react'
-import { useRouter, NextRouter } from 'next/router'
 import BackToHomeButton from '@/components/UI/BackToHomeButton'
 import '@testing-library/jest-dom'
 
-const mockedUseRouter = useRouter as jest.MockedFunction<typeof useRouter>
+// const mockedUseRouter = useRouter as jest.MockedFunction<typeof useRouter>
 
 // Next.jsのRouterをモックする
 // jest.mock('next/router', () => ({
