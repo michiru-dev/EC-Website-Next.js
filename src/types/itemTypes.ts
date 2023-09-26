@@ -5,7 +5,7 @@ export type ItemType = {
   title: string
   price: number
   description: string
-  category: string //unionに変える
+  category: string
   image: string
   rating: { rate: number; count: number }
   quantity: number
