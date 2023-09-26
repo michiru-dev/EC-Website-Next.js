@@ -1,13 +1,20 @@
-import { render, screen } from '@testing-library/react'
+import { fireEvent, render, screen } from '@testing-library/react'
 import BackToHomeButton from '@/components/UI/BackToHomeButton'
 import '@testing-library/jest-dom'
-
-// const mockedUseRouter = useRouter as jest.MockedFunction<typeof useRouter>
+import { NextRouter, useRouter } from 'next/router'
+import { ReactNode } from 'react'
 
 // Next.jsのRouterをモックする
-// jest.mock('next/router', () => ({
-//   useRouter: jest.fn(),
+// const mockPush = jest.fn()
+// jest.mock('next/link', () => ({
+//   useRouter: jest.fn().mockReturnValue({ push: mockPush }),
 // }))
+// jest.mock(
+//   'next/link',
+//   () =>
+//     ({ children }: { children: ReactNode }) =>
+//       children
+// )
 
 describe('BackToHomeButton', () => {
   test('it renders the home icon', () => {
@@ -19,16 +26,11 @@ describe('BackToHomeButton', () => {
     expect(link).toContainElement(svg)
   })
 
-  //   test('it links to the home page', () => {
-  //     const push = jest.fn()
-  //     mockedUseRouter.mockReturnValue({
-  //       push,
-  //     } as unknown as NextRouter)
+  // test('it links to the home page', () => {
+  //   render(<BackToHomeButton />)
+  //   const link = screen.getByRole('link')
+  //   fireEvent.click(link)
 
-  //     render(<BackToHomeButton />)
-  //     const link = screen.getByRole('link')
-  //     link.click()
-
-  //     expect(push).toHaveBeenCalledWith('/')
-  //   })
+  //   expect(link).toHaveBeenCalledWith('/')
+  // })
 })

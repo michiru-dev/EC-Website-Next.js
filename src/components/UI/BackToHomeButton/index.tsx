@@ -6,7 +6,7 @@ import styles from '@/components/UI/BackToHomeButton/BackToHomeButton.module.scs
 function BackToHomeButton() {
   return (
     <div>
-      <Link className={styles.link} href={'/'}>
+      <Link data-testid='goBackHome' className={styles.link} href={'/'}>
         <BiHomeAlt2 data-testid='homeSvgIcon' className={styles.svg} />
       </Link>
     </div>
