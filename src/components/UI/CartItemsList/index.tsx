@@ -10,7 +10,6 @@ type CartItemsProps = {
   showControls: boolean
 }
 
-//SSRぽいけどAPI通信も何もないから何も書かずSSGでOK
 function CartItemsList({ itemsList, showControls }: CartItemsProps) {
   const dispatch = useAppDispatch()
 
